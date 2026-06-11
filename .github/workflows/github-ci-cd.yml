@@ -7,7 +7,7 @@ on:
 env:
   AWS_REGION: eu-west-2                   # set this to your preferred AWS region, e.g. us-west-1
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE22: true
-  BAKEHOUSE_STACK_NAME: Candace-Smith
+  BAKEHOUSE_STACK_NAME: candace-smith
 
 permissions:
   id-token: write
@@ -18,10 +18,6 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     # environment: production
-
-    defaluts:
-      run:
-        working-directory: solution/bakehouse-app
 
     steps:
     - name: Checkout
@@ -80,10 +76,12 @@ jobs:
         exit 1
         fi
     
-    - name: Install Scripts 
+    - name: Install Scripts
+      working-directory: solution/bakehouse-app
       run: ./install.sh
 
     - name: CDK Deploy
+      working-directory: solution/bakehouse-app
       run: npm cdk deploy
 
     - name: Print deployed
