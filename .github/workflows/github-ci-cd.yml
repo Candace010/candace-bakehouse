@@ -31,7 +31,7 @@ jobs:
           # Session name now includes:
           # gha-cdk-{student}-{run_id}-{attempt}
           # Example: gha-cdk-alice-1234567890-1
-        role-session-name: ${github.run_id}
+        role-session-name: ${{github.run_id}}
         aws-region: ${{ env.AWS_REGION }}
       
     - name: Verify OIDC credentials
