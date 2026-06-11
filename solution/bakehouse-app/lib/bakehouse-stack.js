@@ -348,14 +348,6 @@ export class BakehouseStack extends Stack {
       environment: lambdaEnvVars
     })
 
-    const bootstrapLambda = new lambda.Function(this, 'bootstrap-lambda', {
-      functionName: `${props.subDomain}-bootstrap-lambda`,
-      runtime: lambda.Runtime.NODEJS_22_X,
-      handler: 'utility-functions.bootstrapHandler',
-      code: lambda.Code.fromAsset('functions'),
-      environment: lambdaEnvVars
-    })
-
     // -----------------------------
     // USERS (DynamoDB) - Sign up
     // -----------------------------
@@ -578,6 +570,38 @@ export class BakehouseStack extends Stack {
       join(__dirname, '../client/.env.production'),
       `VITE_PRODUCT_CARDS_DOMAIN=https://${productCardsDomain}\n`
     )
+// ----------------------------------
+// GitHub Actions OIDC deploy role
+// ----------------------------------
+    const githubOrg = props.githubOrg || 'Candace010'
+    const githubRepo = props.githubRepo || 'Candace-Smith-stack'
+    const githubRefFilter = props.githubRefFilter || 'ref:refs/heads/main'
+    const githubOidcProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
+      this,
+      'github-oidc-provider',
+      `arn:aws:iam::${this.account}:oidc-provider/token.actions.githubusercontent.com`
+    )
+    const githubActionsDeployRole = new iam.Role(this, 'github-actions-deploy-role', {
+      roleName: 'github-actions-Candace-Smith-bakehouse',
+      assumedBy: new iam.WebIdentityPrincipal(
+        githubOidcProvider.openIdConnectProviderArn,
+        {
+          StringEquals: {
+            'token.actions.githubusercontent.com:aud': 'sts.amazonaws.com'
+          },
+          StringLike: {
+            'token.actions.githubusercontent.com:sub': `repo:${githubOrg}/${githubRepo}:${githubRefFilter}`
+          }
+        }
+      ),
+      description: `Assumed by GitHub Actions for ${githubOrg}/${githubRepo}`,
+      maxSessionDuration: cdk.Duration.hours(1)
+    })
+
+    githubActionsDeployRole.addManagedPolicy(
+    iam.ManagedPolicy.fromAwsManagedPolicyName('AdministratorAccess'))
+
+
 
     // ----------------------------------
     // Outputs
@@ -602,5 +626,11 @@ export class BakehouseStack extends Stack {
     new cdk.CfnOutput(this, 'LoginLambdaName', {
       value: loginLambda.functionName,
     })
+
+    new cdk.CfnOutput(this, 'GitHubActionsRoleArn', {
+      value: githubActionsDeployRole.roleArn,
+      description: 'Set this as the GitHub Actions secret AWS_ROLE_ARN'
+    })
+
   }
 }
