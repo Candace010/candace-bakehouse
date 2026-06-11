@@ -574,7 +574,7 @@ export class BakehouseStack extends Stack {
 // GitHub Actions OIDC deploy role
 // ----------------------------------
     const githubOrg = props.githubOrg || 'Candace010'
-    const githubRepo = props.githubRepo || 'Candace-Smith-stack'
+    const githubRepo = props.githubRepo || 'candace-bakehouse'
     const githubRefFilter = props.githubRefFilter || 'ref:refs/heads/main'
     const githubOidcProvider = iam.OpenIdConnectProvider.fromOpenIdConnectProviderArn(
       this,
