@@ -8,6 +8,8 @@ env:
   AWS_REGION: eu-west-2               # set this to your preferred AWS region, e.g. us-west-1
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE22: true
   BAKEHOUSE_STACK_NAME: candace-smith
+  CDK_DEFAULT_ACCOUNT: 827602716979
+  CDK_DEFAULT_REGION: eu-west-2
 
 permissions:
   id-token: write
