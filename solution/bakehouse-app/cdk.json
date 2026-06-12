@@ -1,5 +1,6 @@
 {
   "app": "node bin/bakehouse-app.js",
+  "requireApproval": "never",
   "watch": {
     "include": [
       "**"
