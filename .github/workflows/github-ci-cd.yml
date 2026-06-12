@@ -94,7 +94,7 @@ jobs:
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
-      run: npx cdk deploy -- Student
+      run: npx cdk deploy -- profile student
 
     - name: Print deployed
       run: |
