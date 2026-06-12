@@ -89,11 +89,12 @@ jobs:
           aws sts get-caller-identity
           echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
           echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
+          echo "profile = $profile"
 
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
-      run: npx cdk deploy
+      run: npx cdk deploy -- Student
 
     - name: Print deployed
       run: |
