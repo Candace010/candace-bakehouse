@@ -10,7 +10,6 @@ env:
   BAKEHOUSE_STACK_NAME: candace-smith
   CDK_DEFAULT_ACCOUNT: 827602716979
   CDK_DEFAULT_REGION: eu-west-2
-  AWS_PROFILE: student
 
 permissions:
   id-token: write
