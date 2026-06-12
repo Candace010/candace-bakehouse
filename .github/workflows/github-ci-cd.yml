@@ -90,7 +90,7 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
           echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
           echo "AWS_PROFILE = $AWS_PROFILE"
-          env grep AWS
+          env | grep AWS
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
