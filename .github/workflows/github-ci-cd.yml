@@ -78,7 +78,10 @@ jobs:
     
     - name: Install Scripts
       working-directory: solution/bakehouse-app
-      run: ./install.sh
+      run: |
+            chmod +x install.sh
+            ./install.sh
+
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
