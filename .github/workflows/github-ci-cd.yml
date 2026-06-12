@@ -85,8 +85,8 @@ jobs:
     - name: Debugging step for aws credentials
       run: |
           aws sts get-caller-identity
-          echo "CDK_DEFAULT_ACCOUNT"
-          echo "CDK_DEFAULT_REGION"
+          echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
+          echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
 
 
     - name: CDK Deploy
