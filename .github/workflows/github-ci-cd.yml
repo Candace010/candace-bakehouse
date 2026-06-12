@@ -90,7 +90,6 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
           echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
           echo "AWS_PROFILE = $AWS_PROFILE"
-          aws cloudformation list-stacks
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
