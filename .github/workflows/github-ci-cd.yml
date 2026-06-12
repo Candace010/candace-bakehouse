@@ -90,11 +90,12 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
           echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
           echo "AWS_PROFILE = $AWS_PROFILE"
-          npx cdk list
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
-      run: npx cdk deploy ${BAKEHOUSE_STACK_NAME}-bakehouse-stack
+      run: |
+          npx cdk list
+          npx cdk deploy ${BAKEHOUSE_STACK_NAME}-bakehouse-stack
 
     - name: Print deployed
       run: |
