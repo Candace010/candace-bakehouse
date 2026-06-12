@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: eu-west-2               # set this to your preferred AWS region, e.g. us-west-1
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE22: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
   BAKEHOUSE_STACK_NAME: candace-smith
   CDK_DEFAULT_ACCOUNT: 827602716979
   CDK_DEFAULT_REGION: eu-west-2
@@ -90,11 +90,11 @@ jobs:
           echo "CDK_DEFAULT_ACCOUNT = $CDK_DEFAULT_ACCOUNT"
           echo "CDK_DEFAULT_REGION = $CDK_DEFAULT_REGION"
           echo "AWS_PROFILE = $AWS_PROFILE"
-
+          npx cdk list
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
-      run: npx cdk deploy candace-smith-bakehouse-stack
+      run: npx cdk deploy ${BAKEHOUSE_STACK_NAME}-bakehouse-stack
 
     - name: Print deployed
       run: |
