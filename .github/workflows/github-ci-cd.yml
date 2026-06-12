@@ -32,7 +32,7 @@ jobs:
         role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           # Session name now includes:
           # gha-cdk-{student}-{run_id}-{attempt}
-          # Example: gha-cdk-alice-1234567890-1
+          # Example: gha-cdk-alice-1234567890-1 
         role-session-name: ${{github.run_id}}
         aws-region: ${{ env.AWS_REGION }}
       
