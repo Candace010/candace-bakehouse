@@ -85,7 +85,7 @@ jobs:
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
-      run: npm cdk deploy
+      run: npx cdk deploy
 
     - name: Print deployed
       run: |
