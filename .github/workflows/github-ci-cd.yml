@@ -33,7 +33,6 @@ jobs:
           # Example: gha-cdk-alice-1234567890-1
         role-session-name: ${{github.run_id}}
         aws-region: ${{ env.AWS_REGION }}
-        output_env-credentials: true
       
     - name: Verify OIDC credentials
       run: |
@@ -80,11 +79,15 @@ jobs:
     - name: Install Scripts
       working-directory: solution/bakehouse-app
       run: |
-            chmod +x install.sh
-            ./install.sh
+          chmod +x install.sh
+          ./install.sh
 
     - name: Debugging step for aws credentials
-      run: aws sts get-caller-identity
+      run: |
+          aws sts get-caller-identity
+          echo "CDK_DEFAULT_ACCOUNT"
+          echo "CDK_DEFAULT_REGION"
+
 
     - name: CDK Deploy
       working-directory: solution/bakehouse-app
